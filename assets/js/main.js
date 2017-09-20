@@ -1,6 +1,6 @@
 let estudiantes = [];
 
-function init() {
+function init(estudiantes) {
     // Elementos
     let botonAgregar = document.getElementById("agregar");
     let botonMostrar = document.getElementById("mostrar");
@@ -23,9 +23,8 @@ function init() {
 
     let eventoTopTecnico = function (e) {
         e.preventDefault();
-        let estudiantes = obtenerListaEstudiantes();
-        let estudiantesActualizacion = actualizar(estudiantes);
-        resultado.innerHTML = mostrarLista(estudiantesActualizacion);
+        estudiantes = actualizar(estudiantes);
+        resultado.innerHTML = mostrarLista(estudiantes);
     };
 
     let eventoTopHSE = function (e) {
@@ -41,7 +40,7 @@ function init() {
     botonTopTecnico.addEventListener("click", eventoTopTecnico);
     botonTopHSE.addEventListener("click", eventoTopHSE);
 }
-init();
+init(estudiantes);
 
 function obtenerListaEstudiantes() {
     return estudiantes;
@@ -49,15 +48,17 @@ function obtenerListaEstudiantes() {
 
 function agregarEstudiante() {
     let userNombre = prompt("¿Cuál es el nombre del estudiante?");
-    let userPuntosTecnicos = prompt("Ingresa tus puntos técnicos");
-    let userPuntosHSE = prompt("Ingresa tus puntos de habilidades socio-emocionales");
+    let userPuntosTecnicos = parseInt(prompt("Ingresa el porcentaje técnico"));
+    let userPuntosHSE = parseInt(prompt("Ingresa el porcentaje de habilidades socio-emocionales"));
     let userEstado = 'Activo';
+    let promedio = parseInt(userPuntosTecnicos + userPuntosHSE)/2;
 
     let estudiante = {
-        nombre: userNombre,
+        nombre: userNombre.charAt(0).toUpperCase() + userNombre.slice(1),
         puntosTecnicos: userPuntosTecnicos,
         puntosHSE: userPuntosHSE,
-        estado: userEstado
+        estado: userEstado,
+        promedio : promedio
     };
     
     estudiantes.push(estudiante);
@@ -68,12 +69,13 @@ function mostrar(estudiante) {
     let resultado = "";
     resultado += "<div class='row'>";
     resultado += "<div class='col m12'>";
-    resultado += "<div class='card blue-grey darken-1'>";
+    resultado += "<div class='card teal grey darken-1'>";
     resultado += "<div class='card-content white-text'>";
     resultado += "<p><strong>Nombre:</strong> " + estudiante.nombre + "</p>";
     resultado += "<p><strong>Puntos Técnicos:</strong> " + estudiante.puntosTecnicos + "</p>";
     resultado += "<p><strong>Puntos HSE:</strong> " + estudiante.puntosHSE + "</p>";
     resultado += "<p><strong>Estado:</strong> " + estudiante.estado + "</p>";
+    resultado += "<p><strong>Estado:</strong> " + estudiante.promedio + "</p>";
     resultado += "</div>";
     resultado += "</div>";
     resultado += "</div>";
@@ -88,14 +90,13 @@ function mostrarLista(estudiantes) {
 }
 
 function actualizar(estudiantes) {
-    return estudiantes.sort(function (a, b) {
-        return (b.puntosTécnicos - a.puntosTécnicos)
-    });
+    estudiantes = empleables(estudiantes);
+    return estudiantes;
 }
 
 function empleables(estudiantes) {
     let filtro = estudiantes.filter(function(estudiante){
-        return estudiante.puntosTecnicos >= 70;
+        return estudiante.promedio >= 70;
     });
     return filtro;
 }
