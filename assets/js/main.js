@@ -1,6 +1,7 @@
+'use strict';
 let estudiantes = [];
 
-function init(estudiantes) {
+function init() {
     // Elementos
     let botonAgregar = $("#agregar");
     let botonMostrar = $("#mostrar");
@@ -90,8 +91,8 @@ function mostrarLista(estudiantes) {
 }
 
 function actualizar(estudiantes) {
-    estudiantes = empleables(estudiantes);
-    return estudiantes;
+    let lista = empleables(estudiantes);
+    return lista;
 }
 
 function empleables(estudiantes) {
