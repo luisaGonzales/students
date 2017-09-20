@@ -2,43 +2,44 @@ let estudiantes = [];
 
 function init(estudiantes) {
     // Elementos
-    let botonAgregar = document.getElementById("agregar");
-    let botonMostrar = document.getElementById("mostrar");
-    let botonTopTecnico = document.getElementById("top-tecnico");
-    let botonTopHSE = document.getElementById("top-hse");
-    let resultado = document.getElementById("contenedor-estudiantes");
+    let botonAgregar = $("#agregar");
+    let botonMostrar = $("#mostrar");
+    let botonTopTecnico = $("#top-tecnico");
+    let botonTopHSE = $("#top-hse");
+    let resultado = $("#contenedor-estudiantes");
+    
 
     // Evento Click - Agregar
     let eventoAgregar = function (e) {
         e.preventDefault();
         let estudiante = agregarEstudiante();
-        resultado.innerHTML = mostrar(estudiante);
+        resultado.html(mostrar(estudiante));
     };
 
     let eventoMostrar = function (e) {
         e.preventDefault();
         let estudiantes = obtenerListaEstudiantes();
-        resultado.innerHTML = mostrarLista(estudiantes);
+        resultado.html(mostrarLista(estudiantes));
     };
 
-    let eventoTopTecnico = function (e) {
+    let eventoActualizar = function (e) {
         e.preventDefault();
         estudiantes = actualizar(estudiantes);
-        resultado.innerHTML = mostrarLista(estudiantes);
+        resultado.html(mostrarLista(estudiantes));
     };
 
-    let eventoTopHSE = function (e) {
+    let eventoEmpleables = function (e) {
         e.preventDefault();
         let estudiantes = obtenerListaEstudiantes();
         let estudiantesEmpleables = empleables(estudiantes);
-        resultado.innerHTML = mostrarLista(estudiantesEmpleables);
+        resultado.html(mostrarLista(estudiantesEmpleables));
     };
 
     // Manejadores de eventos
-    botonAgregar.addEventListener("click", eventoAgregar);
-    botonMostrar.addEventListener("click", eventoMostrar);
-    botonTopTecnico.addEventListener("click", eventoTopTecnico);
-    botonTopHSE.addEventListener("click", eventoTopHSE);
+    botonAgregar.click(eventoAgregar);
+    botonMostrar.click(eventoMostrar);
+    botonTopTecnico.click(eventoActualizar);
+    botonTopHSE.click(eventoEmpleables);
 }
 init(estudiantes);
 
@@ -75,7 +76,6 @@ function mostrar(estudiante) {
     resultado += "<p><strong>Puntos Técnicos:</strong> " + estudiante.puntosTecnicos + "</p>";
     resultado += "<p><strong>Puntos HSE:</strong> " + estudiante.puntosHSE + "</p>";
     resultado += "<p><strong>Estado:</strong> " + estudiante.estado + "</p>";
-    resultado += "<p><strong>Estado:</strong> " + estudiante.promedio + "</p>";
     resultado += "</div>";
     resultado += "</div>";
     resultado += "</div>";
