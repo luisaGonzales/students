@@ -6,33 +6,33 @@ function init(estudiantes) {
     let botonMostrar = $("#mostrar");
     let botonTopTecnico = $("#top-tecnico");
     let botonTopHSE = $("#top-hse");
-    let resultado = document.getElementById("contenedor-estudiantes");
+    let resultado = $("#contenedor-estudiantes");
     
 
     // Evento Click - Agregar
     let eventoAgregar = function (e) {
         e.preventDefault();
         let estudiante = agregarEstudiante();
-        resultado.innerHTML = mostrar(estudiante);
+        resultado.html(mostrar(estudiante));
     };
 
     let eventoMostrar = function (e) {
         e.preventDefault();
         let estudiantes = obtenerListaEstudiantes();
-        resultado.innerHTML = mostrarLista(estudiantes);
+        resultado.html(mostrarLista(estudiantes));
     };
 
     let eventoActualizar = function (e) {
         e.preventDefault();
-        let estudiantes = actualizar(estudiantes);
-        resultado.innerHTML = mostrarLista(estudiantes);
+        estudiantes = actualizar(estudiantes);
+        resultado.html(mostrarLista(estudiantes));
     };
 
     let eventoEmpleables = function (e) {
         e.preventDefault();
         let estudiantes = obtenerListaEstudiantes();
         let estudiantesEmpleables = empleables(estudiantes);
-        resultado.innerHTML = mostrarLista(estudiantesEmpleables);
+        resultado.html(mostrarLista(estudiantesEmpleables));
     };
 
     // Manejadores de eventos
