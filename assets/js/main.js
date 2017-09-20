@@ -2,11 +2,12 @@ let estudiantes = [];
 
 function init(estudiantes) {
     // Elementos
-    let botonAgregar = document.getElementById("agregar");
-    let botonMostrar = document.getElementById("mostrar");
-    let botonTopTecnico = document.getElementById("top-tecnico");
-    let botonTopHSE = document.getElementById("top-hse");
+    let botonAgregar = $("#agregar");
+    let botonMostrar = $("#mostrar");
+    let botonTopTecnico = $("#top-tecnico");
+    let botonTopHSE = $("#top-hse");
     let resultado = document.getElementById("contenedor-estudiantes");
+    
 
     // Evento Click - Agregar
     let eventoAgregar = function (e) {
@@ -21,13 +22,13 @@ function init(estudiantes) {
         resultado.innerHTML = mostrarLista(estudiantes);
     };
 
-    let eventoTopTecnico = function (e) {
+    let eventoActualizar = function (e) {
         e.preventDefault();
-        estudiantes = actualizar(estudiantes);
+        let estudiantes = actualizar(estudiantes);
         resultado.innerHTML = mostrarLista(estudiantes);
     };
 
-    let eventoTopHSE = function (e) {
+    let eventoEmpleables = function (e) {
         e.preventDefault();
         let estudiantes = obtenerListaEstudiantes();
         let estudiantesEmpleables = empleables(estudiantes);
@@ -35,10 +36,10 @@ function init(estudiantes) {
     };
 
     // Manejadores de eventos
-    botonAgregar.addEventListener("click", eventoAgregar);
-    botonMostrar.addEventListener("click", eventoMostrar);
-    botonTopTecnico.addEventListener("click", eventoTopTecnico);
-    botonTopHSE.addEventListener("click", eventoTopHSE);
+    botonAgregar.click(eventoAgregar);
+    botonMostrar.click(eventoMostrar);
+    botonTopTecnico.click(eventoActualizar);
+    botonTopHSE.click(eventoEmpleables);
 }
 init(estudiantes);
 
@@ -75,7 +76,6 @@ function mostrar(estudiante) {
     resultado += "<p><strong>Puntos Técnicos:</strong> " + estudiante.puntosTecnicos + "</p>";
     resultado += "<p><strong>Puntos HSE:</strong> " + estudiante.puntosHSE + "</p>";
     resultado += "<p><strong>Estado:</strong> " + estudiante.estado + "</p>";
-    resultado += "<p><strong>Estado:</strong> " + estudiante.promedio + "</p>";
     resultado += "</div>";
     resultado += "</div>";
     resultado += "</div>";
