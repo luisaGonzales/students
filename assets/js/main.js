@@ -42,7 +42,6 @@ function init() {
     botonTopTecnico.click(eventoActualizar);
     botonTopHSE.click(eventoEmpleables);
 }
-init(estudiantes);
 
 function obtenerListaEstudiantes() {
     return estudiantes;
@@ -68,19 +67,23 @@ function agregarEstudiante() {
 }
 
 function mostrar(estudiante) {
-    let resultado = "";
-    resultado += "<div class='row'>";
-    resultado += "<div class='col m12'>";
-    resultado += "<div class='card teal grey darken-1'>";
-    resultado += "<div class='card-content white-text'>";
-    resultado += "<p><strong>Nombre:</strong> " + estudiante.nombre + "</p>";
-    resultado += "<p><strong>Puntos Técnicos:</strong> " + estudiante.puntosTecnicos + "</p>";
-    resultado += "<p><strong>Puntos HSE:</strong> " + estudiante.puntosHSE + "</p>";
-    resultado += "<p><strong>Estado:</strong> " + estudiante.estado + "</p>";
-    resultado += "</div>";
-    resultado += "</div>";
-    resultado += "</div>";
-    resultado += "</div>";
+    let resultado = ``;
+    if (estudiante != undefined) {
+        if (estudiante.nombre != null || estudiante.puntosTecnicos != null || estudiantes.puntosHSE != null) {
+            resultado += `<div class='row'>`;
+            resultado += `<div class='col m12'>`;
+            resultado += `<div class='card teal grey darken-1'>`;
+            resultado += `<div class='card-content white-text'>`;
+            resultado += `<p><strong>Nombre:</strong> ${ estudiante.nombre} </p>`;
+            resultado += `<p><strong>Puntos Técnicos:</strong> ${ estudiante.puntosTecnicos} </p>`;
+            resultado += `<p><strong>Puntos HSE:</strong> ${ estudiante.puntosHSE} </p>`;
+            resultado += `<p><strong>Estado:</strong> ${ estudiante.estado} </p>`;
+            resultado += `</div>`;
+            resultado += `</div>`;
+            resultado += `</div>`;
+            resultado += `</div>`;
+        }
+    }
     return resultado;
 }
 
@@ -101,3 +104,5 @@ function empleables(estudiantes) {
     });
     return filtro;
 }
+
+init(estudiantes);
